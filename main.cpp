@@ -1,11 +1,11 @@
-#include "mainwindow.h"
+#include "las2xlsconverter.h"
 
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	MainWindow w;
+	LAS2XLSConverter w;
 	w.show();
 	return a.exec();
 }
