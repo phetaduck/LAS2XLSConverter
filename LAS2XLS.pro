@@ -35,7 +35,8 @@ SOURCES += \
     mqtt_impl.cpp
 
 INCLUDEPATH += ./Headers \
-    C:/Dev/Mosquitto/devel
+    C:/Dev/Mosquitto/devel \
+    C:/Dev/protobuff/include \
 
 HEADERS += \
     ./Headers/las2xlsconverter.h \
@@ -60,3 +61,7 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    curve.proto \
+    test_depth1.las

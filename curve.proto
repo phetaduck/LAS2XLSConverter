@@ -1,0 +1,12 @@
+syntax = "proto2";
+
+package LAS2XLS;
+
+message Curve {
+    required string m_name = 1;
+    repeated string m_values = 2;
+}
+
+message Curves {
+    repeated Curve curve = 1;
+}

@@ -243,6 +243,36 @@ void LAS2XLSConverter::stopExportInProgress()
 
 void LAS2XLSConverter::on_actionExport_As_triggered()
 {
+     std::vector<LAS_Curve> curveExport;
+
+     curveExport.reserve(m_curves.size());
+     std::vector<size_t> exportTarget;
+     exportTarget.reserve(ui->lw_CurveNames->count());
+     for (int i = 0; i < ui->lw_CurveNames->count(); i++)
+     {
+         auto item = ui->lw_CurveNames->item(i);
+         if (item->checkState() == Qt::Checked)
+         {
+             exportTarget.emplace_back(i);
+         }
+     }
+    QString testExport{};
+     for (auto& i: exportTarget) {
+         const auto& s = m_curves.at(i);
+         curveExport.emplace_back(s);
+         testExport.append(s.name());
+         testExport.append("\n");
+         for (const auto& v : s.values()) {
+             testExport.append(v);
+         }
+     }
+
+     mqttImpl.connectToBroker(ui->leHostName->text());
+     mqttImpl.publish(ui->leTopic->text(), testExport);
+     mqttImpl.start(false);
+
+     return;
+
 	QString filename = QFileDialog::getSaveFileName(this, "Export as",
 																									QDir::currentPath(),
 																									"*.xlsx");
@@ -276,6 +306,8 @@ void LAS2XLSConverter::on_actionExport_As_triggered()
 void LAS2XLSConverter::on_pbMQTTInit_clicked()
 {
     mqttImpl.connectToBroker(ui->leHostName->text());
+    connect(&mqttImpl, &MQTT_Impl::MessageRecieved,
+            this, &LAS2XLSConverter::onMQTTMsgRecieved);
     mqttImpl.subscribe(ui->leTopic->text());
     connect(&mqttImpl, &MQTT_Impl::MessageRecieved,
             this, &LAS2XLSConverter::onMQTTMsgRecieved);
@@ -291,7 +323,5 @@ void LAS2XLSConverter::on_pbPublish_clicked()
 {
     mqttImpl.connectToBroker(ui->leHostName->text());
     mqttImpl.publish(ui->leTopic->text(), ui->leMessage->text());
-    connect(&mqttImpl, &MQTT_Impl::MessageRecieved,
-            this, &LAS2XLSConverter::onMQTTMsgRecieved);
-
+    mqttImpl.start(false);
 }

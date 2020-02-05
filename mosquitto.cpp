@@ -103,13 +103,15 @@ void Mosquitto::subscribe(const QString &topic) {
 }
 
 void Mosquitto::publish(const QString &topic, const QString &message) {
-    const char *payload = message.toLocal8Bit().data();
+    auto baMessage = message.toStdString();
+    const char *payload = baMessage.c_str();
     const int len = (int)message.size();
 
     const int qos = 0;
+    auto baTopic = topic.toStdString();
     int ret = mosquitto_publish(this->mosq,
                                 NULL,
-                                topic.toLocal8Bit().data(),
+                                baTopic.c_str(),
                                 len,
                                 (const void*)payload,
                                 qos,
