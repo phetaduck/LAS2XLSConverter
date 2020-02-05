@@ -30,9 +30,12 @@ SOURCES += \
     ./Sources/las_section_parser.cpp \
     ./Sources/las_well.cpp \
     main.cpp \
-    ./Sources/xls_exporter.cpp
+    ./Sources/xls_exporter.cpp \
+    mosquitto.cpp \
+    mqtt_impl.cpp
 
-INCLUDEPATH += ./Headers
+INCLUDEPATH += ./Headers \
+    C:/Dev/Mosquitto/devel
 
 HEADERS += \
     ./Headers/las2xlsconverter.h \
@@ -43,7 +46,12 @@ HEADERS += \
     ./Headers/las_section_parser.h \
     ./Headers/las_well.h \
     ./Headers/supported_sections.h \
-    ./Headers/xls_exporter.h
+    ./Headers/xls_exporter.h \
+    Headers/mosquitto.hpp \
+    mqtt_impl.h
+
+LIBS += \
+    -LC:/Dev/Mosquitto/devel -lmosquitto
 
 FORMS += \
   las2xlsconverter.ui

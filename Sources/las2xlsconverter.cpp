@@ -8,9 +8,9 @@
 #include <QtConcurrent/QtConcurrentRun>
 #include <QProgressDialog>
 #include <QMessageBox>
+#include <QDebug>
 
 #include <algorithm>
-
 
 LAS2XLSConverter::LAS2XLSConverter(QWidget *parent)
 	: QMainWindow(parent)
@@ -23,7 +23,7 @@ LAS2XLSConverter::LAS2XLSConverter(QWidget *parent)
 	ui->actionExport_As->setEnabled(false);
 
 	connect(&m_fileLoadWatcher, SIGNAL(finished()),
-					this, SLOT(on_fileLoaded()));
+                    this, SLOT(on_fileLoaded()));
 
 	qRegisterMetaType< std::vector<float> >( "std::vector<float>" );
 	qRegisterMetaType< QStringView >( "QStringView"   );
@@ -195,7 +195,7 @@ void LAS2XLSConverter::stopParsing()
 		QObject::disconnect(&m_converter.value(), &LAS_File_Parser::progressNotifier,
 										 this, &LAS2XLSConverter::on_progressUpdate);
 		QObject::disconnect(&m_converter.value(), &LAS_File_Parser::parseFailed,
-										 this, &LAS2XLSConverter::on_fail);
+                                         this, &LAS2XLSConverter::on_fail);
 		m_converter.value().stop();
 		m_converter.reset();
 		ui->pb_conversion->setValue(0);
@@ -270,5 +270,28 @@ void LAS2XLSConverter::on_actionExport_As_triggered()
 										 m_xlsSavePD, &QProgressDialog::setValue);
 		QThreadPool::globalInstance()->start(&m_exporter.value());
 	}
+
+}
+
+void LAS2XLSConverter::on_pbMQTTInit_clicked()
+{
+    mqttImpl.connectToBroker(ui->leHostName->text());
+    mqttImpl.subscribe(ui->leTopic->text());
+    connect(&mqttImpl, &MQTT_Impl::MessageRecieved,
+            this, &LAS2XLSConverter::onMQTTMsgRecieved);
+    mqttImpl.start(true);
+}
+
+void LAS2XLSConverter::onMQTTMsgRecieved(QString msg)
+{
+    ui->textEdit->append(msg);
+}
+
+void LAS2XLSConverter::on_pbPublish_clicked()
+{
+    mqttImpl.connectToBroker(ui->leHostName->text());
+    mqttImpl.publish(ui->leTopic->text(), ui->leMessage->text());
+    connect(&mqttImpl, &MQTT_Impl::MessageRecieved,
+            this, &LAS2XLSConverter::onMQTTMsgRecieved);
 
 }
