@@ -14,12 +14,11 @@ public:
     void start(bool tryReconnect);
     virtual void subscribe(const QString& topic) override;
 signals:
-    void MessageRecieved(QString msg);
+    void MessageRecieved(std::string msg);
 private:
     QThread* m_messageLoop = nullptr;
-
-    QString m_topic = {};
-    virtual void onMessage(QString topic, QString message) override;
+    QString m_topic;
+    virtual void onMessage(QString topic, std::string message) override;
 };
 
 #endif // MQTT_IMPL_H

@@ -1,6 +1,7 @@
 #include "las2xlsconverter.h"
 #include "ui_las2xlsconverter.h"
 #include "xls_exporter.h"
+#include "curve.pb.h"
 
 #include <QFileDialog>
 #include <QTextCodec>
@@ -30,6 +31,7 @@ LAS2XLSConverter::LAS2XLSConverter(QWidget *parent)
 	qRegisterMetaType< LAS_Curve >( "LAS_Curve"   );
 	qRegisterMetaType< std::vector<QStringView> >( "std::vector<QStringView>"   );
 	qRegisterMetaType< std::vector<LAS_Curve> >( "std::vector<LAS_Curve>"   );
+    qRegisterMetaType< LAS2XLS::Curve >( "LAS2XLS::Curve "   );
 }
 
 LAS2XLSConverter::~LAS2XLSConverter()
@@ -256,19 +258,21 @@ void LAS2XLSConverter::on_actionExport_As_triggered()
              exportTarget.emplace_back(i);
          }
      }
-    QString testExport{};
+    LAS2XLS::Curves testExport{};
      for (auto& i: exportTarget) {
          const auto& s = m_curves.at(i);
          curveExport.emplace_back(s);
-         testExport.append(s.name());
-         testExport.append("\n");
-         for (const auto& v : s.values()) {
-             testExport.append(v);
+         auto curve  = testExport.add_curves();
+         curve->set_m_name(s.name().toStdString());
+         const auto& values = s.values();
+         for (const auto& v : values)
+         {
+             curve->add_m_values(v.toStdString());
          }
      }
 
      mqttImpl.connectToBroker(ui->leHostName->text());
-     mqttImpl.publish(ui->leTopic->text(), testExport);
+     mqttImpl.publish(ui->leTopic->text(), testExport.SerializeAsString());
      mqttImpl.start(false);
 
      return;
@@ -314,14 +318,11 @@ void LAS2XLSConverter::on_pbMQTTInit_clicked()
     mqttImpl.start(true);
 }
 
-void LAS2XLSConverter::onMQTTMsgRecieved(QString msg)
+void LAS2XLSConverter::onMQTTMsgRecieved(std::string msg)
 {
-    ui->textEdit->append(msg);
+    ui->textEdit->append(QString::fromStdString(msg));
 }
 
 void LAS2XLSConverter::on_pbPublish_clicked()
 {
-    mqttImpl.connectToBroker(ui->leHostName->text());
-    mqttImpl.publish(ui->leTopic->text(), ui->leMessage->text());
-    mqttImpl.start(false);
 }

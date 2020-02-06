@@ -356,25 +356,25 @@ class Curves :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kCurveFieldNumber = 1,
+    kCurvesFieldNumber = 1,
   };
-  // repeated .LAS2XLS.Curve curve = 1;
-  int curve_size() const;
+  // repeated .LAS2XLS.Curve curves = 1;
+  int curves_size() const;
   private:
-  int _internal_curve_size() const;
+  int _internal_curves_size() const;
   public:
-  void clear_curve();
-  ::LAS2XLS::Curve* mutable_curve(int index);
+  void clear_curves();
+  ::LAS2XLS::Curve* mutable_curves(int index);
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::LAS2XLS::Curve >*
-      mutable_curve();
+      mutable_curves();
   private:
-  const ::LAS2XLS::Curve& _internal_curve(int index) const;
-  ::LAS2XLS::Curve* _internal_add_curve();
+  const ::LAS2XLS::Curve& _internal_curves(int index) const;
+  ::LAS2XLS::Curve* _internal_add_curves();
   public:
-  const ::LAS2XLS::Curve& curve(int index) const;
-  ::LAS2XLS::Curve* add_curve();
+  const ::LAS2XLS::Curve& curves(int index) const;
+  ::LAS2XLS::Curve* add_curves();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::LAS2XLS::Curve >&
-      curve() const;
+      curves() const;
 
   // @@protoc_insertion_point(class_scope:LAS2XLS.Curves)
  private:
@@ -383,7 +383,7 @@ class Curves :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::LAS2XLS::Curve > curve_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::LAS2XLS::Curve > curves_;
   friend struct ::TableStruct_curve_2eproto;
 };
 // ===================================================================
@@ -546,43 +546,43 @@ Curve::mutable_m_values() {
 
 // Curves
 
-// repeated .LAS2XLS.Curve curve = 1;
-inline int Curves::_internal_curve_size() const {
-  return curve_.size();
+// repeated .LAS2XLS.Curve curves = 1;
+inline int Curves::_internal_curves_size() const {
+  return curves_.size();
 }
-inline int Curves::curve_size() const {
-  return _internal_curve_size();
+inline int Curves::curves_size() const {
+  return _internal_curves_size();
 }
-inline void Curves::clear_curve() {
-  curve_.Clear();
+inline void Curves::clear_curves() {
+  curves_.Clear();
 }
-inline ::LAS2XLS::Curve* Curves::mutable_curve(int index) {
-  // @@protoc_insertion_point(field_mutable:LAS2XLS.Curves.curve)
-  return curve_.Mutable(index);
+inline ::LAS2XLS::Curve* Curves::mutable_curves(int index) {
+  // @@protoc_insertion_point(field_mutable:LAS2XLS.Curves.curves)
+  return curves_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::LAS2XLS::Curve >*
-Curves::mutable_curve() {
-  // @@protoc_insertion_point(field_mutable_list:LAS2XLS.Curves.curve)
-  return &curve_;
+Curves::mutable_curves() {
+  // @@protoc_insertion_point(field_mutable_list:LAS2XLS.Curves.curves)
+  return &curves_;
 }
-inline const ::LAS2XLS::Curve& Curves::_internal_curve(int index) const {
-  return curve_.Get(index);
+inline const ::LAS2XLS::Curve& Curves::_internal_curves(int index) const {
+  return curves_.Get(index);
 }
-inline const ::LAS2XLS::Curve& Curves::curve(int index) const {
-  // @@protoc_insertion_point(field_get:LAS2XLS.Curves.curve)
-  return _internal_curve(index);
+inline const ::LAS2XLS::Curve& Curves::curves(int index) const {
+  // @@protoc_insertion_point(field_get:LAS2XLS.Curves.curves)
+  return _internal_curves(index);
 }
-inline ::LAS2XLS::Curve* Curves::_internal_add_curve() {
-  return curve_.Add();
+inline ::LAS2XLS::Curve* Curves::_internal_add_curves() {
+  return curves_.Add();
 }
-inline ::LAS2XLS::Curve* Curves::add_curve() {
-  // @@protoc_insertion_point(field_add:LAS2XLS.Curves.curve)
-  return _internal_add_curve();
+inline ::LAS2XLS::Curve* Curves::add_curves() {
+  // @@protoc_insertion_point(field_add:LAS2XLS.Curves.curves)
+  return _internal_add_curves();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::LAS2XLS::Curve >&
-Curves::curve() const {
-  // @@protoc_insertion_point(field_list:LAS2XLS.Curves.curve)
-  return curve_;
+Curves::curves() const {
+  // @@protoc_insertion_point(field_list:LAS2XLS.Curves.curves)
+  return curves_;
 }
 
 #ifdef __GNUC__

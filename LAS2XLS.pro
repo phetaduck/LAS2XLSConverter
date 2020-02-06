@@ -29,6 +29,7 @@ SOURCES += \
     ./Sources/las_file_parser.cpp \
     ./Sources/las_section_parser.cpp \
     ./Sources/las_well.cpp \
+    curve.pb.cc \
     main.cpp \
     ./Sources/xls_exporter.cpp \
     mosquitto.cpp \
@@ -36,7 +37,7 @@ SOURCES += \
 
 INCLUDEPATH += ./Headers \
     C:/Dev/Mosquitto/devel \
-    C:/Dev/protobuff/include \
+    C:/Dev/protobuf/include
 
 HEADERS += \
     ./Headers/las2xlsconverter.h \
@@ -49,10 +50,14 @@ HEADERS += \
     ./Headers/supported_sections.h \
     ./Headers/xls_exporter.h \
     Headers/mosquitto.hpp \
+    curve.pb.h \
     mqtt_impl.h
 
 LIBS += \
-    -LC:/Dev/Mosquitto/devel -lmosquitto
+    -LC:/Dev/Mosquitto/devel -lmosquitto \
+    -LC:/Dev/protobuf/lib -llibprotobuf \
+    -LC:/Dev/protobuf/lib -llibprotobuf-lite \
+    -LC:/Dev/protobuf/lib -llibprotoc
 
 FORMS += \
   las2xlsconverter.ui

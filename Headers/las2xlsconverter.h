@@ -48,7 +48,7 @@ public slots:
 
 	void stopExportInProgress();
 
-    void onMQTTMsgRecieved(QString msg);
+    void onMQTTMsgRecieved(std::string msg);
 
 private:
 	void stopParsing();

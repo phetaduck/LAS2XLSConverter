@@ -19,9 +19,10 @@ void MQTT_Impl::subscribe(const QString &topic)
     m_topic = topic;
 }
 
-void MQTT_Impl::onMessage(QString topic, QString message)
+void MQTT_Impl::onMessage(QString topic, std::string message)
 {
-    if (topic == m_topic) {
+    if (m_topic == topic)
+    {
         emit MessageRecieved(message);
     }
 }

@@ -33,12 +33,12 @@ void mosquitto_callback_on_connect(struct mosquitto *mosq_obj, void *obj, int rc
 static void mosquitto_callback_on_message(struct mosquitto *mosq_obj, void *obj, const struct mosquitto_message *mosq_message) {
     (void)mosq_obj;
     Mosquitto *mosq = (Mosquitto*)obj;
-    QString topic(mosq_message->topic);
+    QString topic{mosq_message->topic};
 
     // Build message
-    const int len = mosq_message->payloadlen;
+    const size_t len = mosq_message->payloadlen;
     char* payload = (char*)mosq_message->payload;
-    auto out = QString::fromLocal8Bit(payload, len);
+    auto out = std::string{payload, len};
 
     mosq->onMessage(topic, out);
 }
@@ -102,9 +102,8 @@ void Mosquitto::subscribe(const QString &topic) {
         throw mosquitto_strerror(ret);
 }
 
-void Mosquitto::publish(const QString &topic, const QString &message) {
-    auto baMessage = message.toStdString();
-    const char *payload = baMessage.c_str();
+void Mosquitto::publish(const QString &topic, const std::string &message) {
+    const char *payload = message.c_str();
     const int len = (int)message.size();
 
     const int qos = 0;
