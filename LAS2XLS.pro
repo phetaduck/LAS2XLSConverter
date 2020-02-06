@@ -41,7 +41,6 @@ INCLUDEPATH += ./Headers \
 
 HEADERS += \
     ./Headers/las2xlsconverter.h \
-    ./Headers/las_curve.h \
     ./Headers/las_curvenames_parser.h \
     ./Headers/las_curvevalues_parser.h \
     ./Headers/las_file_parser.h \

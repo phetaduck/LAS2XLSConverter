@@ -64,8 +64,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_curve_2eproto::offsets[] PROTO
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::LAS2XLS::Curve, m_name_),
-  PROTOBUF_FIELD_OFFSET(::LAS2XLS::Curve, m_values_),
+  PROTOBUF_FIELD_OFFSET(::LAS2XLS::Curve, name_),
+  PROTOBUF_FIELD_OFFSET(::LAS2XLS::Curve, values_),
   0,
   ~0u,
   PROTOBUF_FIELD_OFFSET(::LAS2XLS::Curves, _has_bits_),
@@ -87,9 +87,9 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_curve_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\013curve.proto\022\007LAS2XLS\")\n\005Curve\022\016\n\006m_nam"
-  "e\030\001 \002(\t\022\020\n\010m_values\030\002 \003(\t\"(\n\006Curves\022\036\n\006c"
-  "urves\030\001 \003(\0132\016.LAS2XLS.Curve"
+  "\n\013curve.proto\022\007LAS2XLS\"%\n\005Curve\022\014\n\004name\030"
+  "\001 \002(\t\022\016\n\006values\030\002 \003(\t\"(\n\006Curves\022\036\n\006curve"
+  "s\030\001 \003(\0132\016.LAS2XLS.Curve"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_curve_2eproto_deps[1] = {
 };
@@ -100,7 +100,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_cur
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_curve_2eproto_once;
 static bool descriptor_table_curve_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_curve_2eproto = {
-  &descriptor_table_curve_2eproto_initialized, descriptor_table_protodef_curve_2eproto, "curve.proto", 107,
+  &descriptor_table_curve_2eproto_initialized, descriptor_table_protodef_curve_2eproto, "curve.proto", 103,
   &descriptor_table_curve_2eproto_once, descriptor_table_curve_2eproto_sccs, descriptor_table_curve_2eproto_deps, 2, 0,
   schemas, file_default_instances, TableStruct_curve_2eproto::offsets,
   file_level_metadata_curve_2eproto, 2, file_level_enum_descriptors_curve_2eproto, file_level_service_descriptors_curve_2eproto,
@@ -117,7 +117,7 @@ void Curve::InitAsDefaultInstance() {
 class Curve::_Internal {
  public:
   using HasBits = decltype(std::declval<Curve>()._has_bits_);
-  static void set_has_m_name(HasBits* has_bits) {
+  static void set_has_name(HasBits* has_bits) {
     (*has_bits)[0] |= 1u;
   }
 };
@@ -131,18 +131,18 @@ Curve::Curve(const Curve& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_),
-      m_values_(from.m_values_) {
+      values_(from.values_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  m_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_m_name()) {
-    m_name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.m_name_);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (from._internal_has_name()) {
+    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
   // @@protoc_insertion_point(copy_constructor:LAS2XLS.Curve)
 }
 
 void Curve::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Curve_curve_2eproto.base);
-  m_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 Curve::~Curve() {
@@ -151,7 +151,7 @@ Curve::~Curve() {
 }
 
 void Curve::SharedDtor() {
-  m_name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void Curve::SetCachedSize(int size) const {
@@ -169,10 +169,10 @@ void Curve::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  m_values_.Clear();
+  values_.Clear();
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
-    m_name_.ClearNonDefaultToEmptyNoArena();
+    name_.ClearNonDefaultToEmptyNoArena();
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -186,27 +186,27 @@ const char* Curve::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // required string m_name = 1;
+      // required string name = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          auto str = _internal_mutable_m_name();
+          auto str = _internal_mutable_name();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "LAS2XLS.Curve.m_name");
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "LAS2XLS.Curve.name");
           #endif  // !NDEBUG
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // repeated string m_values = 2;
+      // repeated string values = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
           ptr -= 1;
           do {
             ptr += 1;
-            auto str = _internal_add_m_values();
+            auto str = _internal_add_values();
             ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
             #ifndef NDEBUG
-            ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "LAS2XLS.Curve.m_values");
+            ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "LAS2XLS.Curve.values");
             #endif  // !NDEBUG
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
@@ -241,23 +241,23 @@ failure:
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string m_name = 1;
+  // required string name = 1;
   if (cached_has_bits & 0x00000001u) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_m_name().data(), static_cast<int>(this->_internal_m_name().length()),
+      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "LAS2XLS.Curve.m_name");
+      "LAS2XLS.Curve.name");
     target = stream->WriteStringMaybeAliased(
-        1, this->_internal_m_name(), target);
+        1, this->_internal_name(), target);
   }
 
-  // repeated string m_values = 2;
-  for (int i = 0, n = this->_internal_m_values_size(); i < n; i++) {
-    const auto& s = this->_internal_m_values(i);
+  // repeated string values = 2;
+  for (int i = 0, n = this->_internal_values_size(); i < n; i++) {
+    const auto& s = this->_internal_values(i);
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       s.data(), static_cast<int>(s.length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "LAS2XLS.Curve.m_values");
+      "LAS2XLS.Curve.values");
     target = stream->WriteString(2, s, target);
   }
 
@@ -273,22 +273,22 @@ size_t Curve::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:LAS2XLS.Curve)
   size_t total_size = 0;
 
-  // required string m_name = 1;
-  if (_internal_has_m_name()) {
+  // required string name = 1;
+  if (_internal_has_name()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_m_name());
+        this->_internal_name());
   }
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated string m_values = 2;
+  // repeated string values = 2;
   total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(m_values_.size());
-  for (int i = 0, n = m_values_.size(); i < n; i++) {
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(values_.size());
+  for (int i = 0, n = values_.size(); i < n; i++) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-      m_values_.Get(i));
+      values_.Get(i));
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -322,10 +322,10 @@ void Curve::MergeFrom(const Curve& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  m_values_.MergeFrom(from.m_values_);
-  if (from._internal_has_m_name()) {
+  values_.MergeFrom(from.values_);
+  if (from._internal_has_name()) {
     _has_bits_[0] |= 0x00000001u;
-    m_name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.m_name_);
+    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
 }
 
@@ -352,8 +352,8 @@ void Curve::InternalSwap(Curve* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
-  m_values_.InternalSwap(&other->m_values_);
-  m_name_.Swap(&other->m_name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  values_.InternalSwap(&other->values_);
+  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
 }
 

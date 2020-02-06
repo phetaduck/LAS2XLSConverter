@@ -27,10 +27,9 @@ LAS2XLSConverter::LAS2XLSConverter(QWidget *parent)
                     this, SLOT(on_fileLoaded()));
 
 	qRegisterMetaType< std::vector<float> >( "std::vector<float>" );
-	qRegisterMetaType< QStringView >( "QStringView"   );
-	qRegisterMetaType< LAS_Curve >( "LAS_Curve"   );
-	qRegisterMetaType< std::vector<QStringView> >( "std::vector<QStringView>"   );
-	qRegisterMetaType< std::vector<LAS_Curve> >( "std::vector<LAS_Curve>"   );
+    qRegisterMetaType< QStringView >( "QStringView"   );
+    qRegisterMetaType< LAS2XLS::Curves >( "LAS2XLS::Curves"   );
+    qRegisterMetaType< std::vector<QStringView> >( "std::vector<QStringView>"   );
     qRegisterMetaType< LAS2XLS::Curve >( "LAS2XLS::Curve "   );
 }
 
@@ -85,22 +84,21 @@ void LAS2XLSConverter::updateTable(QStringList headers)
 	{
 		// qt insists on using signed ints for indecies
 		ui->tw_CurveData->setRowCount(
-					static_cast<int>(m_curves.begin()->values().size()));
+                    static_cast<int>(m_curves.curves(0).values_size()));
 		ui->tw_CurveData->setHorizontalHeaderLabels(headers);
 		int column = 0;
 		/*
 		 I would rather iterate over headers
 		 but QStringList doesn't support range iteration
 		*/
-		for (const auto& curve : m_curves)
+        for (const auto& curve : m_curves.curves())
 		{
-			if (headers.contains(curve.name()))
-			{
-				const auto& values = curve.values();
-				size_t rowCount = values.size();
+            if (headers.contains(QString::fromStdString(curve.name())))
+            {
+                size_t rowCount = curve.values_size();
 				for (size_t y = 0; y < rowCount; y++)
 				{
-					QTableWidgetItem* item = new QTableWidgetItem(values.at(y));
+                    QTableWidgetItem* item = new QTableWidgetItem(QString::fromStdString(curve.values(y)));
 					ui->tw_CurveData->setItem(
 								static_cast<int>(y), column, item);
 				}
@@ -146,7 +144,7 @@ void LAS2XLSConverter::clearData()
 	ui->tw_CurveData->clear();
 	ui->tw_CurveData->setColumnCount(0);
 	ui->tw_CurveData->setRowCount(0);
-	m_curves.clear();
+    m_curves.Clear();
 }
 
 void LAS2XLSConverter::on_fileLoaded()
@@ -172,7 +170,7 @@ void LAS2XLSConverter::on_fileLoaded()
 	ui->actionOpen_LAS_file->setEnabled(true);
 }
 
-void LAS2XLSConverter::on_lasFileParsed(std::vector<LAS_Curve> curves)
+void LAS2XLSConverter::on_lasFileParsed(LAS2XLS::Curves curves)
 {
 	m_curves = curves;
 	populateListWidget();
@@ -208,9 +206,9 @@ void LAS2XLSConverter::stopParsing()
 void LAS2XLSConverter::populateListWidget()
 {
 	ui->lw_CurveNames->clear();
-	for (const auto& curve : m_curves)
+    for (const auto& curve : m_curves.curves())
 	{
-		QListWidgetItem* item = new QListWidgetItem(curve.name());
+        QListWidgetItem* item = new QListWidgetItem(QString::fromStdString(curve.name()));
 		item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
 		item->setCheckState(Qt::Checked);
 		ui->lw_CurveNames->addItem(item);
@@ -245,66 +243,20 @@ void LAS2XLSConverter::stopExportInProgress()
 
 void LAS2XLSConverter::on_actionExport_As_triggered()
 {
-     std::vector<LAS_Curve> curveExport;
-
-     curveExport.reserve(m_curves.size());
-     std::vector<size_t> exportTarget;
-     exportTarget.reserve(ui->lw_CurveNames->count());
+    LAS2XLS::Curves testExport{};
      for (int i = 0; i < ui->lw_CurveNames->count(); i++)
      {
          auto item = ui->lw_CurveNames->item(i);
          if (item->checkState() == Qt::Checked)
          {
-             exportTarget.emplace_back(i);
-         }
-     }
-    LAS2XLS::Curves testExport{};
-     for (auto& i: exportTarget) {
-         const auto& s = m_curves.at(i);
-         curveExport.emplace_back(s);
-         auto curve  = testExport.add_curves();
-         curve->set_m_name(s.name().toStdString());
-         const auto& values = s.values();
-         for (const auto& v : values)
-         {
-             curve->add_m_values(v.toStdString());
+             auto curve = testExport.add_curves();
+             curve->CopyFrom(m_curves.curves(i));
          }
      }
 
      mqttImpl.connectToBroker(ui->leHostName->text());
      mqttImpl.publish(ui->leTopic->text(), testExport.SerializeAsString());
      mqttImpl.start(false);
-
-     return;
-
-	QString filename = QFileDialog::getSaveFileName(this, "Export as",
-																									QDir::currentPath(),
-																									"*.xlsx");
-	if (filename.length())
-	{
-		stopExportInProgress();
-		std::vector<size_t> exportTarget;
-		for (int i = 0; i < ui->lw_CurveNames->count(); i++)
-		{
-			auto item = ui->lw_CurveNames->item(i);
-			if (item->checkState() == Qt::Checked)
-			{
-				exportTarget.emplace_back(i);
-			}
-		}
-		m_exporter.emplace(filename, m_curves, exportTarget);
-		m_exporter->setAutoDelete(false);
-		m_xlsSavePD = new QProgressDialog("Exporting XLSX", "Cancel", 0, 100);
-		m_xlsSavePD->setWindowModality(Qt::WindowModal);
-		m_xlsSavePD->setAutoClose(true);
-		m_xlsSavePD->show();
-		QObject::connect(&m_exporter.value(), &XLS_Exporter::fileSaved,
-										 m_xlsSavePD, &QProgressDialog::reset);
-		QObject::connect(&m_exporter.value(), &XLS_Exporter::progressNotifier,
-										 m_xlsSavePD, &QProgressDialog::setValue);
-		QThreadPool::globalInstance()->start(&m_exporter.value());
-	}
-
 }
 
 void LAS2XLSConverter::on_pbMQTTInit_clicked()

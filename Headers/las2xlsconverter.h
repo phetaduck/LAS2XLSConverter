@@ -42,7 +42,7 @@ private slots:
 public slots:
 	void on_progressUpdate(int progress);
 	void on_fileLoaded();
-	void on_lasFileParsed(std::vector<LAS_Curve> curves);
+    void on_lasFileParsed(LAS2XLS::Curves curves);
 
 	void on_fail(QString what);
 
@@ -70,7 +70,8 @@ private:
 
     MQTT_Impl mqttImpl = {};
 
-	std::vector<LAS_Curve> m_curves;
+    //std::vector<LAS_Curve> m_curves;
+    LAS2XLS::Curves m_curves = {};
 	std::optional<LAS_File_Parser> m_converter;
 	std::optional<XLS_Exporter> m_exporter;
 	void updateTable(QStringList headers);

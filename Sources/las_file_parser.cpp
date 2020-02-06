@@ -130,8 +130,8 @@ void LAS_File_Parser::composeCurves()
 	// hardcode
 	auto& curveNames = m_parsers.at(s_curve_names_section).parsedData;
 	auto& curveValues = m_parsers.at(s_curve_data_section).parsedData;
-	std::vector<LAS_Curve> out{};
-	out.reserve(curveNames.size());
+    LAS2XLS::Curves out{};
+    //out.reserve(curveNames.size());
 	/*
 	 * A bunch of ugly code that could've been avoided with boost spirit
 	 * and better design
@@ -146,19 +146,24 @@ void LAS_File_Parser::composeCurves()
 	{
 		QMutexLocker lock{&m_stop_signal};
 		if (m_stop) return;
+        auto curve = out.add_curves();
 		auto& cn = curveNames[column];
-		QString name{cn.data(), static_cast<int>(cn.size())};
-		std::vector<QString> values{};
-		values.reserve(curveValues.size() / curveNames.size());
+#pragma message("Warning possible dangling pointer")
+        //auto std_name = cn.toString().toStdString();
+        //curve->set_name(std::move(std_name));
+        curve->set_name(cn.toUtf8().toStdString());
+        //std::vector<QString> values{};
+        //values.reserve(curveValues.size() / curveNames.size());
 		for (size_t row = 0;
 				 row < curveValues.size();
 				 row += curveNames.size())
 		{
 			auto& value = curveValues[row + column];
-			values.emplace_back(value.data(), static_cast<int>(value.size()));
+            curve->add_values(value.toUtf8().toStdString());
+            //values.emplace_back(value.data(), static_cast<int>(value.size()));
 			adjProgress = 10.0f * (currentProg++ / totalSize);
 		}
-		out.emplace_back(name, values);
+        //out.emplace_back(name, values);
 		emit progressNotifier(static_cast<int>(ceil(m_progress + adjProgress)));
 	}
 	emit parseFinished(std::move(out));

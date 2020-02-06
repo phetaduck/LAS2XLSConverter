@@ -12,7 +12,8 @@
 #include <QMutex>
 
 #include "las_section_parser.h"
-#include "las_curve.h"
+
+#include "curve.pb.h"
 
 using ParsedCurves = std::map<QString, std::vector<float>>;
 
@@ -39,7 +40,7 @@ public:
 signals:
 	void progressNotifier(int progress);
 	void sectionsParsed(std::vector<QStringView> sections);
-	void parseFinished(std::vector<LAS_Curve> curveData);
+    void parseFinished(LAS2XLS::Curves curveData);
 	void parseFailed(QString what);
 
 private:

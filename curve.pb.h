@@ -183,51 +183,51 @@ class Curve :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMValuesFieldNumber = 2,
-    kMNameFieldNumber = 1,
+    kValuesFieldNumber = 2,
+    kNameFieldNumber = 1,
   };
-  // repeated string m_values = 2;
-  int m_values_size() const;
+  // repeated string values = 2;
+  int values_size() const;
   private:
-  int _internal_m_values_size() const;
+  int _internal_values_size() const;
   public:
-  void clear_m_values();
-  const std::string& m_values(int index) const;
-  std::string* mutable_m_values(int index);
-  void set_m_values(int index, const std::string& value);
-  void set_m_values(int index, std::string&& value);
-  void set_m_values(int index, const char* value);
-  void set_m_values(int index, const char* value, size_t size);
-  std::string* add_m_values();
-  void add_m_values(const std::string& value);
-  void add_m_values(std::string&& value);
-  void add_m_values(const char* value);
-  void add_m_values(const char* value, size_t size);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& m_values() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_m_values();
+  void clear_values();
+  const std::string& values(int index) const;
+  std::string* mutable_values(int index);
+  void set_values(int index, const std::string& value);
+  void set_values(int index, std::string&& value);
+  void set_values(int index, const char* value);
+  void set_values(int index, const char* value, size_t size);
+  std::string* add_values();
+  void add_values(const std::string& value);
+  void add_values(std::string&& value);
+  void add_values(const char* value);
+  void add_values(const char* value, size_t size);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& values() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_values();
   private:
-  const std::string& _internal_m_values(int index) const;
-  std::string* _internal_add_m_values();
+  const std::string& _internal_values(int index) const;
+  std::string* _internal_add_values();
   public:
 
-  // required string m_name = 1;
-  bool has_m_name() const;
+  // required string name = 1;
+  bool has_name() const;
   private:
-  bool _internal_has_m_name() const;
+  bool _internal_has_name() const;
   public:
-  void clear_m_name();
-  const std::string& m_name() const;
-  void set_m_name(const std::string& value);
-  void set_m_name(std::string&& value);
-  void set_m_name(const char* value);
-  void set_m_name(const char* value, size_t size);
-  std::string* mutable_m_name();
-  std::string* release_m_name();
-  void set_allocated_m_name(std::string* m_name);
+  void clear_name();
+  const std::string& name() const;
+  void set_name(const std::string& value);
+  void set_name(std::string&& value);
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  std::string* mutable_name();
+  std::string* release_name();
+  void set_allocated_name(std::string* name);
   private:
-  const std::string& _internal_m_name() const;
-  void _internal_set_m_name(const std::string& value);
-  std::string* _internal_mutable_m_name();
+  const std::string& _internal_name() const;
+  void _internal_set_name(const std::string& value);
+  std::string* _internal_mutable_name();
   public:
 
   // @@protoc_insertion_point(class_scope:LAS2XLS.Curve)
@@ -237,8 +237,8 @@ class Curve :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> m_values_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr m_name_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> values_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
   friend struct ::TableStruct_curve_2eproto;
 };
 // -------------------------------------------------------------------
@@ -397,149 +397,149 @@ class Curves :
 #endif  // __GNUC__
 // Curve
 
-// required string m_name = 1;
-inline bool Curve::_internal_has_m_name() const {
+// required string name = 1;
+inline bool Curve::_internal_has_name() const {
   bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
-inline bool Curve::has_m_name() const {
-  return _internal_has_m_name();
+inline bool Curve::has_name() const {
+  return _internal_has_name();
 }
-inline void Curve::clear_m_name() {
-  m_name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+inline void Curve::clear_name() {
+  name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   _has_bits_[0] &= ~0x00000001u;
 }
-inline const std::string& Curve::m_name() const {
-  // @@protoc_insertion_point(field_get:LAS2XLS.Curve.m_name)
-  return _internal_m_name();
+inline const std::string& Curve::name() const {
+  // @@protoc_insertion_point(field_get:LAS2XLS.Curve.name)
+  return _internal_name();
 }
-inline void Curve::set_m_name(const std::string& value) {
-  _internal_set_m_name(value);
-  // @@protoc_insertion_point(field_set:LAS2XLS.Curve.m_name)
+inline void Curve::set_name(const std::string& value) {
+  _internal_set_name(value);
+  // @@protoc_insertion_point(field_set:LAS2XLS.Curve.name)
 }
-inline std::string* Curve::mutable_m_name() {
-  // @@protoc_insertion_point(field_mutable:LAS2XLS.Curve.m_name)
-  return _internal_mutable_m_name();
+inline std::string* Curve::mutable_name() {
+  // @@protoc_insertion_point(field_mutable:LAS2XLS.Curve.name)
+  return _internal_mutable_name();
 }
-inline const std::string& Curve::_internal_m_name() const {
-  return m_name_.GetNoArena();
+inline const std::string& Curve::_internal_name() const {
+  return name_.GetNoArena();
 }
-inline void Curve::_internal_set_m_name(const std::string& value) {
+inline void Curve::_internal_set_name(const std::string& value) {
   _has_bits_[0] |= 0x00000001u;
-  m_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
 }
-inline void Curve::set_m_name(std::string&& value) {
+inline void Curve::set_name(std::string&& value) {
   _has_bits_[0] |= 0x00000001u;
-  m_name_.SetNoArena(
+  name_.SetNoArena(
     &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:LAS2XLS.Curve.m_name)
+  // @@protoc_insertion_point(field_set_rvalue:LAS2XLS.Curve.name)
 }
-inline void Curve::set_m_name(const char* value) {
+inline void Curve::set_name(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   _has_bits_[0] |= 0x00000001u;
-  m_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:LAS2XLS.Curve.m_name)
+  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:LAS2XLS.Curve.name)
 }
-inline void Curve::set_m_name(const char* value, size_t size) {
+inline void Curve::set_name(const char* value, size_t size) {
   _has_bits_[0] |= 0x00000001u;
-  m_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:LAS2XLS.Curve.m_name)
+  // @@protoc_insertion_point(field_set_pointer:LAS2XLS.Curve.name)
 }
-inline std::string* Curve::_internal_mutable_m_name() {
+inline std::string* Curve::_internal_mutable_name() {
   _has_bits_[0] |= 0x00000001u;
-  return m_name_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  return name_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline std::string* Curve::release_m_name() {
-  // @@protoc_insertion_point(field_release:LAS2XLS.Curve.m_name)
-  if (!_internal_has_m_name()) {
+inline std::string* Curve::release_name() {
+  // @@protoc_insertion_point(field_release:LAS2XLS.Curve.name)
+  if (!_internal_has_name()) {
     return nullptr;
   }
   _has_bits_[0] &= ~0x00000001u;
-  return m_name_.ReleaseNonDefaultNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  return name_.ReleaseNonDefaultNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline void Curve::set_allocated_m_name(std::string* m_name) {
-  if (m_name != nullptr) {
+inline void Curve::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
     _has_bits_[0] |= 0x00000001u;
   } else {
     _has_bits_[0] &= ~0x00000001u;
   }
-  m_name_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), m_name);
-  // @@protoc_insertion_point(field_set_allocated:LAS2XLS.Curve.m_name)
+  name_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:LAS2XLS.Curve.name)
 }
 
-// repeated string m_values = 2;
-inline int Curve::_internal_m_values_size() const {
-  return m_values_.size();
+// repeated string values = 2;
+inline int Curve::_internal_values_size() const {
+  return values_.size();
 }
-inline int Curve::m_values_size() const {
-  return _internal_m_values_size();
+inline int Curve::values_size() const {
+  return _internal_values_size();
 }
-inline void Curve::clear_m_values() {
-  m_values_.Clear();
+inline void Curve::clear_values() {
+  values_.Clear();
 }
-inline std::string* Curve::add_m_values() {
-  // @@protoc_insertion_point(field_add_mutable:LAS2XLS.Curve.m_values)
-  return _internal_add_m_values();
+inline std::string* Curve::add_values() {
+  // @@protoc_insertion_point(field_add_mutable:LAS2XLS.Curve.values)
+  return _internal_add_values();
 }
-inline const std::string& Curve::_internal_m_values(int index) const {
-  return m_values_.Get(index);
+inline const std::string& Curve::_internal_values(int index) const {
+  return values_.Get(index);
 }
-inline const std::string& Curve::m_values(int index) const {
-  // @@protoc_insertion_point(field_get:LAS2XLS.Curve.m_values)
-  return _internal_m_values(index);
+inline const std::string& Curve::values(int index) const {
+  // @@protoc_insertion_point(field_get:LAS2XLS.Curve.values)
+  return _internal_values(index);
 }
-inline std::string* Curve::mutable_m_values(int index) {
-  // @@protoc_insertion_point(field_mutable:LAS2XLS.Curve.m_values)
-  return m_values_.Mutable(index);
+inline std::string* Curve::mutable_values(int index) {
+  // @@protoc_insertion_point(field_mutable:LAS2XLS.Curve.values)
+  return values_.Mutable(index);
 }
-inline void Curve::set_m_values(int index, const std::string& value) {
-  // @@protoc_insertion_point(field_set:LAS2XLS.Curve.m_values)
-  m_values_.Mutable(index)->assign(value);
+inline void Curve::set_values(int index, const std::string& value) {
+  // @@protoc_insertion_point(field_set:LAS2XLS.Curve.values)
+  values_.Mutable(index)->assign(value);
 }
-inline void Curve::set_m_values(int index, std::string&& value) {
-  // @@protoc_insertion_point(field_set:LAS2XLS.Curve.m_values)
-  m_values_.Mutable(index)->assign(std::move(value));
+inline void Curve::set_values(int index, std::string&& value) {
+  // @@protoc_insertion_point(field_set:LAS2XLS.Curve.values)
+  values_.Mutable(index)->assign(std::move(value));
 }
-inline void Curve::set_m_values(int index, const char* value) {
+inline void Curve::set_values(int index, const char* value) {
   GOOGLE_DCHECK(value != nullptr);
-  m_values_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:LAS2XLS.Curve.m_values)
+  values_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:LAS2XLS.Curve.values)
 }
-inline void Curve::set_m_values(int index, const char* value, size_t size) {
-  m_values_.Mutable(index)->assign(
+inline void Curve::set_values(int index, const char* value, size_t size) {
+  values_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:LAS2XLS.Curve.m_values)
+  // @@protoc_insertion_point(field_set_pointer:LAS2XLS.Curve.values)
 }
-inline std::string* Curve::_internal_add_m_values() {
-  return m_values_.Add();
+inline std::string* Curve::_internal_add_values() {
+  return values_.Add();
 }
-inline void Curve::add_m_values(const std::string& value) {
-  m_values_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:LAS2XLS.Curve.m_values)
+inline void Curve::add_values(const std::string& value) {
+  values_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:LAS2XLS.Curve.values)
 }
-inline void Curve::add_m_values(std::string&& value) {
-  m_values_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:LAS2XLS.Curve.m_values)
+inline void Curve::add_values(std::string&& value) {
+  values_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:LAS2XLS.Curve.values)
 }
-inline void Curve::add_m_values(const char* value) {
+inline void Curve::add_values(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
-  m_values_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:LAS2XLS.Curve.m_values)
+  values_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:LAS2XLS.Curve.values)
 }
-inline void Curve::add_m_values(const char* value, size_t size) {
-  m_values_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:LAS2XLS.Curve.m_values)
+inline void Curve::add_values(const char* value, size_t size) {
+  values_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:LAS2XLS.Curve.values)
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
-Curve::m_values() const {
-  // @@protoc_insertion_point(field_list:LAS2XLS.Curve.m_values)
-  return m_values_;
+Curve::values() const {
+  // @@protoc_insertion_point(field_list:LAS2XLS.Curve.values)
+  return values_;
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
-Curve::mutable_m_values() {
-  // @@protoc_insertion_point(field_mutable_list:LAS2XLS.Curve.m_values)
-  return &m_values_;
+Curve::mutable_values() {
+  // @@protoc_insertion_point(field_mutable_list:LAS2XLS.Curve.values)
+  return &values_;
 }
 
 // -------------------------------------------------------------------
